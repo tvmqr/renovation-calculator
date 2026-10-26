@@ -1,0 +1,257 @@
+/* ===== GLOBAL STYLES ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --Primary: #10B981;       /* Зеленый акцент */
+  --Primary-Hover: #059669;
+  --Background: #F3F4F6;    /* Светло-серый фон */
+  --Card-Bg: #FFFFFF;       /* Белый фон формы */
+  --Dark-Card: #0F172A;     /* Темно-синий/черный для сметы */
+  --Dark-Card-Text: #94A3B8;
+  --TextColor: #1E293B;     /* Темно-серый текст */
+  --Border: #E2E8F0;
+  --FontFamily: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--FontFamily);
+  background-color: var(--Background);
+  color: var(--TextColor);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+
+/* ===== LAYOUT ===== */
+
+.main-wrapper {
+    padding: 4rem 0;
+    min-height: 100vh;
+}
+
+.page-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--Primary);
+    letter-spacing: 0.05em;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.subtitle {
+    color: #64748B;
+    font-size: 1.125rem;
+}
+
+.estimator-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    align-items: start;
+}
+
+
+
+/* ===== FORM SECTION ===== */
+
+.form-section {
+    background-color: var(--Card-Bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+label, legend {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--TextColor);
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--Border);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #F8FAFC;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: var(--Primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Checkboxes */
+.checkbox-group {
+    border: none;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.checkbox-group legend {
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--Primary);
+    cursor: pointer;
+}
+
+
+
+/* ===== SUMMARY CARD ===== */
+
+.summary-card {
+    background-color: var(--Dark-Card);
+    color: #FFFFFF;
+    padding: 2rem;
+    border-radius: 16px;
+    position: sticky;
+    top: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+}
+
+.summary-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--Dark-Card-Text);
+    margin-bottom: 1.5rem;
+}
+
+.total-price-wrapper {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.total-label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--Dark-Card-Text);
+    margin-bottom: 0.25rem;
+}
+
+.total-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--Primary);
+    letter-spacing: -0.02em;
+}
+
+.summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9375rem;
+    color: var(--Dark-Card-Text);
+}
+
+.summary-list li span:last-child {
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--Primary);
+    color: #FFFFFF;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: var(--Primary-Hover);
+}
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: var(--Dark-Card-Text);
+    text-align: center;
+    margin-top: 1rem;
+    line-height: 1.4;
+}
+
+
+
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+    .estimator-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-card {
+        position: static; /* Убираем липкость на мобилке */
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
