@@ -1,4 +1,5 @@
 /* ===== GLOBAL STYLES ===== */
+
 *,
 *::before,
 *::after {
@@ -8,250 +9,340 @@
 }
 
 :root {
-  --Primary: #10B981;       /* Зеленый акцент */
+  --Primary: #10B981;
   --Primary-Hover: #059669;
-  --Background: #F3F4F6;    /* Светло-серый фон */
-  --Card-Bg: #FFFFFF;       /* Белый фон формы */
-  --Dark-Card: #0F172A;     /* Темно-синий/черный для сметы */
-  --Dark-Card-Text: #94A3B8;
-  --TextColor: #1E293B;     /* Темно-серый текст */
-  --Border: #E2E8F0;
+  
+  --Text-Main: #0F172A;
+  --Text-Muted: #64748B;
   --FontFamily: 'Inter', system-ui, sans-serif;
+
+  /* Strict Glass Palette */
+  --Glass-Bg: rgba(255, 255, 255, 0.6);
+  --Glass-Border: rgba(255, 255, 255, 0.8);
+  --Glass-Dark-Bg: rgba(15, 23, 42, 0.85);
+  --Glass-Dark-Border: rgba(255, 255, 255, 0.08);
 }
 
 body {
   font-family: var(--FontFamily);
-  background-color: var(--Background);
-  color: var(--TextColor);
+  /* Strict base color */
+  background-color: #F8FAFC;
+  
+  /* Subtle tints to make the glass effect visible without being loud */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(15, 23, 42, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+    
+  color: var(--Text-Main);
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-attachment: fixed; /* Keeps the background in place */
 }
 
 
 
 /* ===== LAYOUT ===== */
 
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
 .main-wrapper {
-    padding: 4rem 0;
-    min-height: 100vh;
+  padding: 6rem 0;
 }
 
 .page-header {
-    margin-bottom: 2.5rem;
-    text-align: center;
+  margin-bottom: 4rem;
+  text-align: center;
 }
 
 .eyebrow {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--Primary);
-    letter-spacing: 0.05em;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--Primary);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0.5rem 0;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  color: var(--Text-Main);
 }
 
 .subtitle {
-    color: #64748B;
-    font-size: 1.125rem;
+  color: var(--Text-Muted);
+  font-size: 1.125rem;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .estimator-layout {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 2rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2.5rem;
+  align-items: start;
 }
 
 
 
-/* ===== FORM SECTION ===== */
+/* ===== LEFT COLUMN: FORM (Light Glass) ===== */
 
 .form-section {
-    background-color: var(--Card-Bg);
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  background: var(--Glass-Bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--Glass-Border);
+  border-radius: 32px;
+  padding: 3rem;
+  /* Multi-layered shadows for a floating effect */
+  box-shadow: 
+    0 24px 48px -12px rgba(15, 23, 42, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
 
 label, legend {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--TextColor);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--Text-Main);
 }
 
+/* Inputs */
 input[type="number"], select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--Border);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: inherit;
-    background-color: #F8FAFC;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--Text-Main);
+  background: rgba(255, 255, 255, 0.7); /* Slightly more solid than the card */
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+input[type="number"]:hover, select:hover {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Custom Select Arrow */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.2em;
+  padding-right: 3rem;
 }
 
 input[type="number"]:focus, select:focus {
-    border-color: var(--Primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  background: #FFFFFF;
+  border-color: var(--Primary);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
 }
 
 /* Checkboxes */
 .checkbox-group {
-    border: none;
-    gap: 0.75rem;
-    margin-top: 2rem;
+  border: none;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .checkbox-group legend {
-    margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--Text-Muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 400;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--Text-Main);
+  cursor: pointer;
+  padding: 0.6rem 0;
+  transition: opacity 0.2s;
+}
+
+.checkbox-label:hover {
+  opacity: 0.7;
 }
 
 input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--Primary);
-    cursor: pointer;
+  width: 24px;
+  height: 24px;
+  accent-color: var(--Primary);
+  cursor: pointer;
+  border-radius: 8px;
 }
 
 
 
-/* ===== SUMMARY CARD ===== */
+/* ===== RIGHT COLUMN: SUMMARY (Dark Glass) ===== */
+
+.summary-card-wrapper {
+  position: sticky;
+  top: 2rem; /* Sticks to the top when scrolling */
+}
 
 .summary-card {
-    background-color: var(--Dark-Card);
-    color: #FFFFFF;
-    padding: 2rem;
-    border-radius: 16px;
-    position: sticky;
-    top: 2rem;
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+  background: var(--Glass-Dark-Bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--Glass-Dark-Border);
+  border-radius: 32px;
+  padding: 3rem;
+  color: #FFFFFF;
+  box-shadow: 
+    0 30px 60px -15px rgba(15, 23, 42, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .summary-title {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--Dark-Card-Text);
-    margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
 }
 
 .total-price-wrapper {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .total-label {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--Dark-Card-Text);
-    margin-bottom: 0.25rem;
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .total-price {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--Primary);
-    letter-spacing: -0.02em;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--Primary);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
 }
 
 .summary-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .summary-list li {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9375rem;
-    color: var(--Dark-Card-Text);
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .summary-list li span:last-child {
-    color: #FFFFFF;
-    font-weight: 500;
+  color: #FFFFFF;
+  font-weight: 600;
 }
 
 .btn-submit {
-    width: 100%;
-    background-color: var(--Primary);
-    color: #FFFFFF;
-    padding: 1rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s;
+  width: 100%;
+  background: var(--Primary);
+  color: #FFFFFF;
+  padding: 1.2rem;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
 }
 
 .btn-submit:hover {
-    background-color: var(--Primary-Hover);
+  background: var(--Primary-Hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
 }
 
 .disclaimer {
-    font-size: 0.75rem;
-    color: var(--Dark-Card-Text);
-    text-align: center;
-    margin-top: 1rem;
-    line-height: 1.4;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  margin-top: 1.5rem;
+  line-height: 1.5;
 }
 
 
 
 
 
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-    .estimator-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .summary-card {
-        position: static; /* Убираем липкость на мобилке */
-    }
+/* ===== RESPONSIVE DESIGN ===== */
 
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
+@media (max-width: 1024px) {
+  .estimator-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .summary-card-wrapper {
+    position: static;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .form-section, .summary-card {
+    padding: 2rem;
+    border-radius: 24px;
+  }
 }
