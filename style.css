@@ -319,7 +319,7 @@ input[type="checkbox"]:checked::after {
   border-radius: 16px;
   font-size: 1.05rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
   box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
 }
 
