@@ -24,8 +24,18 @@ let currentData = {
 
 function calculate() {
     const formData = new FormData(form);
-
     const area = Number(formData.get('area'));
+
+    currentData.area = area;
+
+    if (!area || area < 1) {
+        totalPrice.textContent = '$0';
+        sumArea.textContent = '$0';
+        sumMaterials.textContent = '$0';
+        sumServices.textContent = '$0';
+        return; 
+    }
+
     const renovationType = formData.get('renovation-type');
     const propertyType = formData.get('property-type');
     const materialLevel = formData.get('material-level');
@@ -91,6 +101,11 @@ function calculate() {
 submitBtn.addEventListener('click', function(event) {
     event.preventDefault();
 
+    if (currentData.area < 1) {
+        alert("Please enter a valid apartment area.");
+        return;
+    }
+
     submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
 
@@ -142,6 +157,55 @@ form.addEventListener('input', calculate);
 form.addEventListener('change', calculate);
 
 calculate();
+
+
+
+// ===== CUSTOM SELECT LOGIC =====
+
+const customSelects = document.querySelectorAll('.custom-select');
+
+customSelects.forEach(select => {
+    const trigger = select.querySelector('.custom-select__trigger');
+    const triggerText = trigger.querySelector('span');
+    const options = select.querySelectorAll('.custom-select__options li');
+    
+    const hiddenInput = select.previousElementSibling;
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        customSelects.forEach(s => {
+            if (s !== select) s.classList.remove('open');
+        });
+        
+        select.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            options.forEach(o => o.classList.remove('selected'));
+            
+            option.classList.add('selected');
+            
+            triggerText.textContent = option.textContent;
+            
+            hiddenInput.value = option.dataset.value;
+            
+            select.classList.remove('open');
+            
+            calculate();
+        });
+    });
+});
+
+// 3. Закрытие всех селектов при клике вне их
+document.addEventListener('click', (e) => {
+    customSelects.forEach(select => {
+        if (!select.contains(e.target)) {
+            select.classList.remove('open');
+        }
+    });
+});
 
 
 
